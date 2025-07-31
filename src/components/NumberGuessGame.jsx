@@ -9,6 +9,7 @@ const NumberGuessGame = () => {
   const [message, setMessage] = useState("");
   const [isWin, setIsWin] = useState(false);
   const [history, setHistory] = useState([]); //입력했던 값 - 배열인 이유 입력했던 값들이라
+  const [count, setCount] = useState(0);
 
   const handleSubmit = () => {
     console.log("타겟:", target);
@@ -20,6 +21,7 @@ const NumberGuessGame = () => {
     }
 
     setHistory([...history, num]); //배열은 거의 스프레드랑 같이 씀 -push 잘안씀
+    setCount(count + 1);
 
     if (num === target) {
       setMessage(`🎉 정답! ${target}입니다.`);
@@ -39,6 +41,7 @@ const NumberGuessGame = () => {
     setMessage("");
     setIsWin(false);
     setHistory([]);
+    setCount(0);
   };
 
   return (
@@ -64,7 +67,7 @@ const NumberGuessGame = () => {
 
       <div className="w-full">
         <h2 className="font-semibold mb-2">
-          입력 기록
+          입력 기록 : {count} 회
           <ul className="list-disc list-inside text-sm text-gray-600">
             {history.map((num, index) => (
               <li key={index}>{num}</li>
